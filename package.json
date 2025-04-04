@@ -7,11 +7,14 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
+    "startr": "react-native start --reset-cache",
     "test": "jest"
   },
   "dependencies": {
     "react": "18.3.1",
-    "react-native": "0.76.7"
+    "react-native": "0.76.7",
+    "react-native-gesture-handler": "^2.25.0",
+    "react-native-safe-area-context": "^5.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

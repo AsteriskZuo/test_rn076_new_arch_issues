@@ -1,29 +1,35 @@
 /* eslint-disable react-native/no-inline-styles */
-// https://github.com/hakymz/ReactNativeCustomModal/blob/main/App.js
-import React from 'react';
+// ref: https://github.com/software-mansion/react-native-gesture-handler/blob/main/example/src/showcase/bottomSheet/index.tsx
+// When using Model in React Native, the inner FlatList cannot be scrolled. ref: https://zhuanlan.zhihu.com/p/630696822
+
+import * as React from 'react';
 import {
   Animated,
-  Button,
-  KeyboardAvoidingView,
   Modal as RNModal,
   Platform,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   TouchableWithoutFeedback,
+  KeyboardAvoidingView,
   useWindowDimensions,
   View,
 } from 'react-native';
 
-export type SlideModalProps = any;
-function SlideModal(props: SlideModalProps) {
+// import {useModalAnimation} from './Modal.hooks';
+import type {SlideModalProps} from './types';
+
+/**
+ * Mainly solves the effect problem of native modal component `RNModal` display mask.
+ */
+export function SlideModal(props: SlideModalProps) {
   const {
     propsRef,
     modalAnimationType,
     modalStyle,
     onRequestModalClose,
     disableBackgroundClose = false,
+    backgroundColor,
     backgroundTransparent = false,
+    children,
     onFinished,
     keyboardVerticalOffset,
     enabledKeyboardAdjust = false,
@@ -63,6 +69,7 @@ function SlideModal(props: SlideModalProps) {
 
   if (propsRef.current) {
     propsRef.current.startShow = (onf?: () => void, timeout?: number) => {
+      console.log('test:zuoyu:startShow', timeout);
       setVisible(true);
       if (timeout !== undefined) {
         startShow(() => {
@@ -120,7 +127,16 @@ function SlideModal(props: SlideModalProps) {
           }
         }}>
         <Animated.View
-          style={[StyleSheet.absoluteFill, styles.modalBackGround]}
+          style={[
+            StyleSheet.absoluteFill,
+            {
+              backgroundColor:
+                backgroundTransparent === true
+                  ? undefined
+                  : (backgroundColor ?? 'red'),
+              opacity: backgroundTransparent === true ? 0 : backgroundOpacity,
+            },
+          ]}
         />
       </TouchableWithoutFeedback>
       <KeyboardAvoidingView
@@ -132,79 +148,17 @@ function SlideModal(props: SlideModalProps) {
         <Animated.View
           style={[
             {
-              // display: visible ? 'flex' : 'none',
-              // flex: 1,
+              flex: 1,
               justifyContent: 'flex-end',
-              // opacity: modalAnimationType === 'fade' ? backgroundOpacity : 1,
+              opacity: modalAnimationType === 'fade' ? backgroundOpacity : 1,
               transform: [{translateY: translateY}],
             },
             modalStyle,
           ]}
           pointerEvents={'box-none'}>
-          <View style={{height: 100, width: 100, backgroundColor: 'red'}} />
+          {children}
         </Animated.View>
       </KeyboardAvoidingView>
     </RNModal>
   );
 }
-export const App = () => {
-  const propsRef = React.useRef<SlideModalProps>({});
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <SlideModal
-        propsRef={propsRef}
-        modalAnimationType="slide"
-        onRequestModalClose={() => propsRef.current?.startHide()}>
-        <View style={{alignItems: 'center'}}>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={() => propsRef.current?.startHide()}>
-              <Text>{'close'}</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text>{'logo'}</Text>
-        </View>
-
-        <Text style={{marginVertical: 30, fontSize: 20, textAlign: 'center'}}>
-          Congratulations registration was successful
-        </Text>
-      </SlideModal>
-      <Button
-        title="Open Modal"
-        onPress={() => propsRef.current?.startShow()}
-      />
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  modalBackGround: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContainer: {
-    width: '80%',
-    backgroundColor: 'white',
-    paddingHorizontal: 20,
-    paddingVertical: 30,
-    borderRadius: 20,
-    elevation: 20,
-  },
-  header: {
-    width: '100%',
-    height: 40,
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-  },
-});
-
-export const StrictModeApp = () => {
-  return (
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
-};

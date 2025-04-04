@@ -132,7 +132,6 @@ function SlideModal(props: SlideModalProps) {
         <Animated.View
           style={[
             {
-              // display: visible ? 'flex' : 'none',
               // flex: 1,
               justifyContent: 'flex-end',
               // opacity: modalAnimationType === 'fade' ? backgroundOpacity : 1,
