@@ -38,9 +38,9 @@ newArchEnabled = true;
 
 ## Solutions
 
-### Option 1: Disable Hermes Engine
+### Option 1: Disable New Arch
 
-Modify your native configuration to disable Hermes:
+Modify your native configuration to disable new arch:
 
 ```gradle
 // android/app/build.gradle
