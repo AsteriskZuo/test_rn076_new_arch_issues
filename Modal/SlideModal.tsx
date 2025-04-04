@@ -11,7 +11,6 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   useWindowDimensions,
-  View,
 } from 'react-native';
 
 // import {useModalAnimation} from './Modal.hooks';
