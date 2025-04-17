@@ -3,8 +3,8 @@
  */
 
 import {AppRegistry} from 'react-native';
-import {App, StrictModeApp} from './App4';
+import {App, StrictModeApp} from './App';
 import {name as appName} from './app.json';
 
-// AppRegistry.registerComponent(appName, () => App);
-AppRegistry.registerComponent(appName, () => StrictModeApp);
+AppRegistry.registerComponent(appName, () => App);
+// AppRegistry.registerComponent(appName, () => StrictModeApp);
