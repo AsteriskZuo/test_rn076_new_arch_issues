@@ -96,6 +96,7 @@ function SendMessage() {
     return (
       <SafeAreaView style={styles.common}>
         <Chatroom
+          containerStyle={{backgroundColor: 'green'}}
           messageList={{
             props: {
               visible: true,
