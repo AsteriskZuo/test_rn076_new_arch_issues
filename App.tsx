@@ -23,12 +23,12 @@ import {
   useRoomContext,
 } from 'react-native-chat-room';
 
-const appKey = '<your app key>';
-const userId = '<current login id>';
-const userName = '<current login name>';
-const userToken = '<current login token or password>';
-const userAvatar = '<current login avatar url>';
-const roomId = '<chat room ID>';
+const appKey = 'easemob#easeim';
+const userId = 'du004';
+const userName = 'du004name';
+const userToken = 'YWMtQS-V2htYEfCbOcf51UsWyFzzvlQ7sUrSpVuQGlyIzFQ7untgxw4R7ars76tj9Ip5AwMAAAGWQoNsFzeeSADDNRaayvr8biZUSNWE82MtRoKfK-fmddK_IYWF97LwPg';
+const userAvatar = 'https://www.baidu.com/img/flexible/logo/pc/result.png';
+const roomId = '278370132754436';
 const room = {
   roomId: roomId,
   owner: userId,
